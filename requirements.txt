@@ -1,0 +1,10 @@
+django
+gunicorn
+django_social_auth
+South
+django-form-utils
+django_debug_toolbar
+simplejson
+psycopg2
+bpython
+facebook-sdk
