@@ -1,17 +1,22 @@
 from django.conf.urls import patterns, include, url
 
+from secretpost.settings.base import MEDIA_ROOT, MEDIA_URL
+
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'poster.views.home', name='home'),
-    # url(r'^poster/', include('poster.foo.urls')),
+	url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+	url(r'^admin/', include(admin.site.urls)),
+	url(r'', include('social_auth.urls')),
+	)
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
-)
+urlpatterns += patterns('secretpost.secrets.views',
+	url(r'^$', view='home', name='home'),
+	)
+
+urlpatterns += patterns('',
+	(r'^%s(?P<path>.*)$' % MEDIA_URL[1:], 'django.views.static.serve', {'document_root': MEDIA_ROOT}),
+	)

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block navbar %}
+    
+{% endblock navbar %}
+
+
+{% block content %}
+<div class="container-narrow">
+
+  <div class="masthead">
+    <ul class="nav nav-pills pull-right">
+      <li class='active'><a href="https://github.com/Visgean/secret-poster">Github</a></li>
+  </ul>
+  <h3 class="muted">{% trans "Secret Poster" %}</h3>
+</div>
+
+<hr>
+
+<div class="jumbotron">
+    <h1>{% trans "Let your users post anonymously to your Facebook page" %}</h1>
+    <p class="lead">{% trans "This website enables your users to post anonymously to your Facebook page. (Yeah, like you wouldn't get  that that huge thing above)" %}</p>
+        <a class="btn btn-large btn-success" href="#">{% trans "Sign up with Facebook" %}</a>
+    </div>
+
+    <hr>
+
+    <div class="row-fluid marketing">
+        <div class="span6">
+          <h4>{% trans "Why?" %}</h4>
+          <p>{% trans "This project has started as a reaction to a huge demand for the secret posting services, but most of the working Facebook pages are not open for registration nor open source. In this project I want to made an easy to use service that enabled every community to have it's own Facebook page to reveal secrets " %}</p>
+
+          <h4>{% trans "Is this a copy?" %}</h4>
+          <p>{% trans "Yes, this page is heavily inspired by similar pages." %}</p>
+
+      </div>
+
+      <div class="span6">
+          <h4>{% trans "Can I have the code?" %}</h4>
+          <p>{% trans "Yes, just look at our github page: " %}<a href="https://github.com/Visgean/secret-poster">Visgean/secret-poster</a>, it's written in Django.</p>
+
+          <h4>{% trans "Who should use it?" %}</h4>
+          <p>{% trans "Any community that consist from more than two individuals." %}</p>
+
+          <h4>{% trans "Is it hard to register?" %}</h4>
+          <p>{% trans "Not really, just click on that big supportive green button." %}</p>
+      </div>
+  </div>
+
+  <hr>
+
+  {% endblock content %}

@@ -1,6 +1,9 @@
 *.py[cod]
 
 venv
+secrets/fixtures/
+credentials.py
+sqlite3.db
 
 # C extensions
 *.so

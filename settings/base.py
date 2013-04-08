@@ -73,17 +73,12 @@ TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
                                "django.core.context_processors.static",
                                "django.core.context_processors.tz",
                                "django.contrib.messages.context_processors.messages",
-                               
-                               "secretpost.context_proccesors.menu",
-                               "secretpost.context_proccesors.restaurants",
-                               "secretpost.context_proccesors.opening_hours",
-                               "secretpost.context_proccesors.now",
-                               )
+                                                              )
 
 
 INTERNAL_IPS = ('127.0.0.1',)
 
-ROOT_URLCONF = 'secret-poster.urls'
+ROOT_URLCONF = 'secretpost.urls'
 
 
 INSTALLED_APPS = (
@@ -98,7 +93,7 @@ INSTALLED_APPS = (
     'south',
     "debug_toolbar",
     "social_auth",
-
+    
     "secretpost.secrets",
 )
 
@@ -108,6 +103,10 @@ DEBUG_TOOLBAR_CONFIG = {
 
 
 LOGIN_URL = "/login/"
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
+
+FACEBOOK_EXTENDED_PERMISSIONS = ['']
 
 LOGGING = {
     'version': 1,
@@ -130,7 +129,12 @@ LOGGING = {
 
 DATE_INPUT_FORMATS = ('%d.%m.%Y',)
 
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'cs'
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.facebook.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 
 # translations
 gettext = lambda s: s
