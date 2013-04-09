@@ -4,6 +4,8 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 
+from secretpost.credentials import *
+
 if socket.gethostname() in ("Rew", 'rewi'):
     from secretpost.settings.rewitaqia import *
 else:
@@ -44,8 +46,6 @@ STATICFILES_FINDERS = (
     #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'adljkvhbasjdhbckjashdbckjashbdckjashbdc'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -106,7 +106,7 @@ LOGIN_URL = "/login/"
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
 
-FACEBOOK_EXTENDED_PERMISSIONS = ['']
+FACEBOOK_EXTENDED_PERMISSIONS = ['user_groups', 'manage_pages']
 
 LOGGING = {
     'version': 1,

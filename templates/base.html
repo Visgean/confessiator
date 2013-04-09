@@ -5,118 +5,94 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>{% block title %}{% if title %}{{title}}{% else %}{% trans "SecretPoster" %}{% endif %}{% endblock title %}</title>
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{% block title %}{% if title %}{{title}}{% else %}{% trans "SecretPoster" %}{% endif %}{% endblock title %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
 
-<link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap.min.css">
-<style type="text/css">
-body {
-padding-top: 20px;
-padding-bottom: 40px;
-}
+    <link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap.min.css">
+    <style type="text/css">
+    body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+    }
 
-/* Custom container */
-.container-narrow {
-margin: 0 auto;
-max-width: 700px;
-}
-.container-narrow > hr {
-margin: 30px 0;
-}
+    /* Custom container */
+    .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+    }
+    .container-narrow > hr {
+        margin: 30px 0;
+    }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-margin: 60px 0;
-text-align: center;
-}
-.jumbotron h1 {
-font-size: 72px;
-line-height: 1;
-}
-.jumbotron .btn {
-font-size: 21px;
-padding: 14px 24px;
-}
+    /* Main marketing message and sign up button */
+    .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+    }
+    .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+    }
+    .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+    }
 
-/* Supporting marketing content */
-.marketing {
-margin: 60px 0;
-}
-.marketing p + h4 {
-margin-top: 28px;
-}
-</style>
-<link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap-responsive.min.css">
-<link rel="stylesheet" href="{{MEDIA_URL}}css/main.css">
+    /* Supporting marketing content */
+    .marketing {
+        margin: 60px 0;
+    }
+    .marketing p + h4 {
+        margin-top: 28px;
+    }
+    </style>
+    <link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="{{MEDIA_URL}}css/main.css">
 
-<script src="{{MEDIA_URL}}js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script src="{{MEDIA_URL}}js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <body>
 <!--[if lt IE 7]>
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
-
-    <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
-    {% block navbar %}
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="#">Project name</a>
-                    <div class="nav-collapse collapse">
-                        <ul class="nav">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li class="nav-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <form class="navbar-form pull-right">
-                            <input class="span2" type="text" placeholder="Email">
-                            <input class="span2" type="password" placeholder="Password">
-                            <button type="submit" class="btn">Sign in</button>
-                        </form>
-                    </div><!--/.nav-collapse -->
-                </div>
-            </div>
-        </div>
-    {% endblock navbar %}
-
-    {% block content %}
     <div class="container">
-    </div> <!-- /container -->
+        {% block navbar %}
+        <div class="container-narrow">
+          <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+             <li class="disabled"><a href="#">{% trans "Logged as" %} {{user.get_profile}}</a></li>
+             <li class='active'><a href="https://github.com/Visgean/secret-poster">Github</a></li>
+         </ul>
+         <h3 class="muted">{% trans "Secret Poster" %}</h3>
+     </div>
+     {% endblock navbar %}
 
-    {% endblock content %}
+     <hr>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{MEDIA_URL}}js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+     {% block content %}
 
-    <script src="{{MEDIA_URL}}js/vendor/bootstrap.min.js"></script>
 
-    <script src="{{MEDIA_URL}}js/main.js"></script>
+     {% endblock content %}
+ </div> <!-- /container -->
 
-    <script>
-    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g,s)}(document,'script'));
-    </script>
+
+
+
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+ <script>window.jQuery || document.write('<script src="{{MEDIA_URL}}js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+
+ <script src="{{MEDIA_URL}}js/vendor/bootstrap.min.js"></script>
+
+ <script src="{{MEDIA_URL}}js/main.js"></script>
+
+ <script>
+ var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+ (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+ </script>
 </body>
 </html>

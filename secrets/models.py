@@ -11,7 +11,7 @@ class UserProfile(models.Model):
     user = models.ForeignKey(User)
     
     def __unicode__(self):
-        return self.user.username
+        return '{0} {1}'.format(self.user.first_name, self.user.last_name)
 
     @property
     def facebook_profile(self):
@@ -30,11 +30,28 @@ class UserProfile(models.Model):
 
 
 class Organization(models.Model):
+    ORG_TYPES = (
+            ('g', _('Facebook group')),
+            ('p', _('Facebook page')),
+        )
+
+
+
     name = models.CharField(max_length=20)
     secret_token = models.CharField(max_length=140)
     facebook_id = models.IntegerField()
 
-    password_for_admins = models.CharField(blank=True, max_length=30)
+
+    org_type = models.CharField(max_length=2, choices=ORG_TYPES, unique=True)
+
+
+    slug = models.SlugField(_('URL identifier for your page ?'), unique=True)
+
+    moderated = models.BooleanField(_('Do you want to moderate the posts?'), default=True)
+    content = models.TextField(_('Rules for your page, parsed with markdown'))
+
+
+    password_for_admins = models.CharField(blank=True, null=True, max_length=30)
     admins = models.ManyToManyField(UserProfile)
 
     url = models.SlugField()
