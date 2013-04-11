@@ -6,10 +6,15 @@ from django.contrib.auth.models import User
 
 from social_auth.models import UserSocialAuth
 
+from secretpost.settings.base import FACEBOOK_API_SECRET
+
+
+# SecretGraphAPI = facebook.GraphAPI(FACEBOOK_API_SECRET)
+
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User)
-    
+
     def __unicode__(self):
         return '{0} {1}'.format(self.user.first_name, self.user.last_name)
 
@@ -27,38 +32,28 @@ class UserProfile(models.Model):
         return facebook.GraphAPI(self.graph_api_key, timeout=1)
 
 
+class WallObject(models.Model):
+    WALL_TYPES = (
+        ('g', _('Facebook group')),
+        ('p', _('Facebook page')),
+    )
 
-
-class Organization(models.Model):
-    ORG_TYPES = (
-            ('g', _('Facebook group')),
-            ('p', _('Facebook page')),
-        )
-
-
-
-    name = models.CharField(max_length=20)
+    owner = models.ForeignKey(UserProfile, related_name='owned_walls')
+    name = models.CharField(_('Name'), max_length=20)
     secret_token = models.CharField(max_length=140)
     facebook_id = models.IntegerField()
+    wall_type = models.CharField(_('Wall type'), max_length=2, choices=WALL_TYPES, unique=True)
+    slug = models.SlugField(_('URL id'), help_text=_('URL identifier for adding new objects'), unique=True)
 
+    moderated = models.BooleanField(_('Moderated'), help_text=_('Do you want to moderate the posts?'), default=True)
+    content = models.TextField(_('Content'), help_text=_('Rules for your page, parsed with markdown'))
 
-    org_type = models.CharField(max_length=2, choices=ORG_TYPES, unique=True)
-
-
-    slug = models.SlugField(_('URL identifier for your page ?'), unique=True)
-
-    moderated = models.BooleanField(_('Do you want to moderate the posts?'), default=True)
-    content = models.TextField(_('Rules for your page, parsed with markdown'))
-
-
-    password_for_admins = models.CharField(blank=True, null=True, max_length=30)
+    password_for_admins = models.CharField(_('Admin password'), blank=True, null=True, max_length=30)
     admins = models.ManyToManyField(UserProfile)
 
-    url = models.SlugField()
-
     class Meta:
-        verbose_name = _('Organization')
-        verbose_name_plural = _('Organizations')
+        verbose_name = _('Facebook wall')
+        verbose_name_plural = _('Facebook walls')
 
     def __unicode__(self):
         return self.name
@@ -70,7 +65,7 @@ class Secret(models.Model):
     approved = models.BooleanField(_('Was this approved by moderators?'), default=False)
     posted = models.BooleanField(_('Was it posted to page/group?'), default=False)
 
-    org = models.ForeignKey(Organization)
+    wall = models.ForeignKey(WallObject)
 
     class Meta:
         verbose_name = _('Secret')

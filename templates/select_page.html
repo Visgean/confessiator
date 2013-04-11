@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+
+{% block content %}
+    <h1>{% trans "Select page do you want to use:" %}</h1>
+    <p class="lead">{% trans "This website enables your users to post anonymously to your Facebook page. (Yeah, like you wouldn't get  that that huge thing above)" %}</p>
+        <a class="btn btn-large btn-success" href="{% url socialauth_begin "facebook" %}">{% trans "Sign up with Facebook" %}</a>
+    </div>
+
+
+  {% endblock content %}

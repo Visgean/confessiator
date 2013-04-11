@@ -15,10 +15,10 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('secretpost.secrets.views',
 	url(r'^$', view='home', name='home'),
-	url(r'^group_select$', view='group_select', name='group_select'),
-	url(r'^/p/(?P<slug>\w+)/$', view='post', name='post'),
-	url(r'^/p/(?P<slug>\w+)/moderate$', view='moderate', name='moderate'),
-	url(r'^/p/(?P<slug>\w+)/associate_admin$', view='moderate', name='moderate'),
+	url(r'^select_page$', view='select_page', name='select_page'),
+	# url(r'^/p/(?P<slug>\w+)/$', view='post', name='post'),
+	# url(r'^/p/(?P<slug>\w+)/moderate$', view='moderate', name='moderate'),
+	# url(r'^/p/(?P<slug>\w+)/associate_admin$', view='moderate', name='moderate'),
 	)
 
 urlpatterns += patterns('',
