@@ -4,10 +4,14 @@
 
 
 {% block content %}
-    <h1>{% trans "Select page do you want to use:" %}</h1>
-    <p class="lead">{% trans "This website enables your users to post anonymously to your Facebook page. (Yeah, like you wouldn't get  that that huge thing above)" %}</p>
-        <a class="btn btn-large btn-success" href="{% url socialauth_begin "facebook" %}">{% trans "Sign up with Facebook" %}</a>
-    </div>
+<div class="jumbotron">
+	<h1>{% trans "Select page you want to use:" %}</h1>
+	<div class="well" style="max-width: 400px; margin: 0 auto 10px;">
+		{% for page in pages %}
+			<a class="btn btn-large btn-block btn-success" href="{% url import_page uid=page.id %}">{{ page.name }}</a>
+		{% endfor %}    
+	</div>
+</div>
 
 
-  {% endblock content %}
+{% endblock content %}

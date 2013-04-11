@@ -23,6 +23,12 @@ class UserProfile(models.Model):
         # return UserSocialAuth.objects.filter(user=self.user, provider="facebook")[0]
         return self.user.social_auth.all()[0] if len(self.user.social_auth.all()) else None
 
+
+    def get_fuid(self):
+        'Get Facebook UID'
+        return self.facebook_profile.uid
+
+
     @property
     def graph_api_key(self):
         return self.facebook_profile.tokens["access_token"]
@@ -40,16 +46,18 @@ class WallObject(models.Model):
 
     owner = models.ForeignKey(UserProfile, related_name='owned_walls')
     name = models.CharField(_('Name'), max_length=20)
+    content = models.TextField(_('Content'), help_text=_('Rules for your page, parsed with markdown'), blank=True, null=True, )
     secret_token = models.CharField(max_length=140)
     facebook_id = models.IntegerField()
     wall_type = models.CharField(_('Wall type'), max_length=2, choices=WALL_TYPES, unique=True)
     slug = models.SlugField(_('URL id'), help_text=_('URL identifier for adding new objects'), unique=True)
+    
+    url = models.URLField(_('URL for wall'), help_text=_('URL adress for the wall'), unique=True)
 
     moderated = models.BooleanField(_('Moderated'), help_text=_('Do you want to moderate the posts?'), default=True)
-    content = models.TextField(_('Content'), help_text=_('Rules for your page, parsed with markdown'))
 
-    password_for_admins = models.CharField(_('Admin password'), blank=True, null=True, max_length=30)
-    admins = models.ManyToManyField(UserProfile)
+    admin_token = models.CharField(_('Admin password'), blank=True, null=True, max_length=30)
+    admins = models.ManyToManyField(UserProfile, blank=True, null=True, )
 
     class Meta:
         verbose_name = _('Facebook wall')

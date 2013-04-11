@@ -7,7 +7,10 @@
 <div class="jumbotron">
     <h1>{% trans "Let your users post anonymously to your Facebook page" %}</h1>
     <p class="lead">{% trans "This website enables your users to post anonymously to your Facebook page. (Yeah, like you wouldn't get  that that huge thing above)" %}</p>
-        <a class="btn btn-large btn-success" href="{% url socialauth_begin "facebook" %}">{% trans "Sign up with Facebook" %}</a>
+      <div class="well" style="max-width: 400px; margin: 0 auto 10px;">
+        <a class="btn btn-large btn-block btn-success" href="{% url socialauth_begin "facebook" %}">{% trans "Sign up with Facebook" %}</a>
+      </div>
+
     </div>
 
     <hr>
@@ -30,7 +33,7 @@
           <p>{% trans "Any community that consist from more than two individuals." %}</p>
 
           <h4>{% trans "Is it hard to register?" %}</h4>
-          <p>{% trans "Not really, just click on that big supportive green button." %}</p>
+          <p>{% trans "Not really, just click on that big green button." %}</p>
       </div>
   </div>
 
