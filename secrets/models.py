@@ -49,15 +49,20 @@ class WallObject(models.Model):
     content = models.TextField(_('Content'), help_text=_('Rules for your page, parsed with markdown'), blank=True, null=True, )
     secret_token = models.CharField(max_length=140)
     facebook_id = models.IntegerField()
-    wall_type = models.CharField(_('Wall type'), max_length=2, choices=WALL_TYPES, unique=True)
+    wall_type = models.CharField(_('Wall type'), max_length=2, choices=WALL_TYPES)
     slug = models.SlugField(_('URL id'), help_text=_('URL identifier for adding new objects'), unique=True)
     
-    url = models.URLField(_('URL for wall'), help_text=_('URL adress for the wall'), unique=True)
+    url = models.URLField(_('URL for wall'), help_text=_('URL adress for the wall'))
 
     moderated = models.BooleanField(_('Moderated'), help_text=_('Do you want to moderate the posts?'), default=True)
 
     admin_token = models.CharField(_('Admin password'), blank=True, null=True, max_length=30)
     admins = models.ManyToManyField(UserProfile, blank=True, null=True, )
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('wall_detail', (self.slug,))
+
 
     class Meta:
         verbose_name = _('Facebook wall')
@@ -65,6 +70,10 @@ class WallObject(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+
+
 
 
 class Secret(models.Model):

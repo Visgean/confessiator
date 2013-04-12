@@ -58,6 +58,7 @@ def import_page(request, uid):
 
             wall.save()
 
+            HttpResponseRedirect(wall.get_absolute_url())
     else:
         form = WallForm(initial={
             'name' : page['name'],
@@ -68,3 +69,12 @@ def import_page(request, uid):
     return direct_to_template(request, 'import_page.html', {
         'form': form,
     })
+
+
+@login_required
+def wall_detail(request, slug):
+    wall = get_object_or_404(WallObject, slug = slug, owner = request.user.get_profile())
+
+    return direct_to_template(request, 'wall_detail.html', {
+        'wall' : wall
+        })

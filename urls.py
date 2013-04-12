@@ -19,7 +19,8 @@ urlpatterns += patterns('secretpost.secrets.views',
 	url(r'^select_wall/$', view='select_wall', name='select_wall'),
 	url(r'^import_page/(?P<uid>\d+)/$', view='import_page', name='import_page'),
 	
-	# url(r'^/p/(?P<slug>\w+)/$', view='post', name='post'),
+	url(r'^p/(?P<slug>[-\w]+)/detail/$', view='wall_detail', name='wall_detail'),
+	#url(r'^/p/(?P<slug>\w+)/$', view='post', name='post'),
 	# url(r'^/p/(?P<slug>\w+)/moderate$', view='moderate', name='moderate'),
 	# url(r'^/p/(?P<slug>\w+)/associate_admin$', view='moderate', name='moderate'),
 	)
