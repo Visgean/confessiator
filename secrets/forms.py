@@ -18,3 +18,4 @@ class WallForm(ModelForm):
             'admins', 
             'admin_token'
             )
+

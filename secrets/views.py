@@ -78,3 +78,8 @@ def wall_detail(request, slug):
     return direct_to_template(request, 'wall_detail.html', {
         'wall' : wall
         })
+
+
+
+def post(request, slug):
+    
