@@ -1,4 +1,4 @@
-secret-poster
+Confessiator
 =============
 
-Secret posting system that anonymously shares secrets
+Confessiator is a tool to enable your facebook users confess anonymously to your Facebook wall.
