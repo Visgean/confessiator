@@ -1,7 +1,18 @@
 from django.forms import ModelForm
 
-from secrets.models import WallObject
+from secrets.models import WallObject, Confession
 
+
+class ConfessionForm(ModelForm):
+    class Meta:
+        model = Confession
+        exclude = (
+            'approved',
+            'declined',
+            'posted', 
+            'last_change', 
+            'wall', 
+            )
 
 
 

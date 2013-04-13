@@ -5,15 +5,16 @@
 
 {% block content %}
 	{% if walls %}
-		
+		<div class="well" style="max-width: 400px; margin: 0 auto 10px;">
+			{% for wall in walls %}
+				<a class="btn btn-large btn-block btn-success" href="{{wall.get_absolute_url}}">{{ wall }}</a>
+			{% endfor %}    
+		</div>
 	{% else %}
-	<div class="jumbotron">
-
-	    <h2>{% trans "You dont have any pages/groups enabled with anonymous posting, add them?" %}</h2>
-	            <a class="btn btn-large btn-success" href="{% url select_wall %}">{% trans "Add them!" %}</a>
-
-    </div>
-
+		<div class="jumbotron">
+		    <h2>{% trans "You dont have any pages/groups enabled with anonymous posting, add them?" %}</h2>
+	        <a class="btn btn-large btn-success" href="{% url select_wall %}">{% trans "Add them!" %}</a>
+   		</div>
 	{% endif %}	
 
 

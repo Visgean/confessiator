@@ -4,7 +4,13 @@
 
 
 {% block content %}
-
+	<div class="well" style="max-width: 400px; margin: 0 auto 10px;">
+		<h1>{{wall.name}}</h1>
+		<hr>
+		<a class="btn btn-large btn-block btn-info" href="{{wall.get_post_url}}">{% trans "Confess publicly" %}</a>
+		<a class="btn btn-large btn-block btn-success" href="">{% trans "Moderate" %}</a>
+		<a class="btn btn-large btn-block btn-warning" href="">{% trans "Edit" %}</a>
+	</div>
 
 
 

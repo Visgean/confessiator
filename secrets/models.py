@@ -63,6 +63,10 @@ class WallObject(models.Model):
     def get_absolute_url(self):
         return ('wall_detail', (self.slug,))
 
+    @models.permalink
+    def get_post_url(self):
+        return ('post', (self.slug,))
+
 
     class Meta:
         verbose_name = _('Facebook wall')
@@ -76,17 +80,20 @@ class WallObject(models.Model):
 
 
 
-class Secret(models.Model):
+class Confession(models.Model):
     content = models.TextField(_('Your secret'))
 
     approved = models.BooleanField(_('Was this approved by moderators?'), default=False)
-    posted = models.BooleanField(_('Was it posted to page/group?'), default=False)
+    declined = models.BooleanField(_('Was this declined by moderators?'), default=False)
+    posted = models.BooleanField(_('Synced to wall?'), default=False)
+
+    last_change = models.DateTimeField(auto_now_add=True)
 
     wall = models.ForeignKey(WallObject)
 
     class Meta:
-        verbose_name = _('Secret')
-        verbose_name_plural = _('Secrets')
+        verbose_name = _('Confession')
+        verbose_name_plural = _('Confessions')
 
     def __unicode__(self):
         return self.content

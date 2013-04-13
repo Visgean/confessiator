@@ -17,15 +17,15 @@
 
 		<table class='table'>
 			{% for field in form %}
-			<tr><th>{{field.label}}</th><th>{{field}}</th><th>{{field.help_text}}
+			<tr><th>{{field.label}}</th><th>{{field}}</th><th>
 				{% if field.errors %}
-				<div class="alert-message error">
-					<p>{% for error in field.errors %}
+				<div class="alert alert-error">
+					{% for error in field.errors %}
 						{{ error }}
-						{% endfor %}
-					</p>
+					{% endfor %}
 				</div>
 				{% endif %}
+				{{field.help_text}}
 			</th></tr>
 			{% endfor %}
 		</table>
