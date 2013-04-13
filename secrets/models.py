@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 from social_auth.models import UserSocialAuth
 
-from secretpost.settings.base import FACEBOOK_API_SECRET
+from confessiator.settings.base import FACEBOOK_API_SECRET
 
 
 # SecretGraphAPI = facebook.GraphAPI(FACEBOOK_API_SECRET)

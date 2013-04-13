@@ -4,12 +4,12 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 
-from secretpost.credentials import *
+from confessiator.credentials import *
 
 if socket.gethostname() in ("Rew", 'rewi'):
-    from secretpost.settings.rewitaqia import *
+    from confessiator.settings.rewitaqia import *
 else:
-    from secretpost.settings.production import *
+    from confessiator.settings.production import *
 
 ADMINS = (
     ('Visgean Skeloru', 'Visgean@gmail.com'),
@@ -78,7 +78,7 @@ TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
 
 INTERNAL_IPS = ('127.0.0.1',)
 
-ROOT_URLCONF = 'secretpost.urls'
+ROOT_URLCONF = 'confessiator.urls'
 
 
 INSTALLED_APPS = (
@@ -94,7 +94,7 @@ INSTALLED_APPS = (
     "debug_toolbar",
     "social_auth",
     
-    "secretpost.secrets",
+    "confessiator.secrets",
 )
 
 DEBUG_TOOLBAR_CONFIG = {

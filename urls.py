@@ -1,7 +1,7 @@
 from django.contrib.auth.views import login, logout_then_login
 from django.conf.urls import patterns, include, url
 
-from secretpost.settings.base import MEDIA_ROOT, MEDIA_URL
+from confessiator.settings.base import MEDIA_ROOT, MEDIA_URL
 
 from django.contrib import admin
 admin.autodiscover()
@@ -14,7 +14,7 @@ urlpatterns = patterns('',
 	)
 
 
-urlpatterns += patterns('secretpost.secrets.views',
+urlpatterns += patterns('confessiator.secrets.views',
 	url(r'^$', view='home', name='home'),
 	url(r'^select_wall/$', view='select_wall', name='select_wall'),
 	url(r'^import_page/(?P<uid>\d+)/$', view='import_page', name='import_page'),
