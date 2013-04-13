@@ -1,15 +1,17 @@
 import random
 import string
+import simplejson
 
 from django.utils.translation import ugettext as _
 from django.views.generic import TemplateView, DetailView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic.simple import direct_to_template
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 
-from secrets.models import UserProfile, WallObject
+from secrets.models import UserProfile, WallObject, Confession
 from secrets.forms import WallForm, ConfessionForm
 
 get_pages = lambda u: [u.graph_api.get_object(p['page_id']) for p in u.graph_api.fql('SELECT page_id FROM page_admin WHERE uid={0}'.format(u.get_fuid()))]
@@ -72,13 +74,47 @@ def import_page(request, uid):
     })
 
 
-@login_required
+# @login_required # we dont need login required as there is get object or 404
 def wall_detail(request, slug):
     wall = get_object_or_404(WallObject, slug = slug, owner = request.user.get_profile())
 
     return direct_to_template(request, 'wall_detail.html', {
         'wall' : wall
         })
+
+# @login_required # we dont need login required as there is get object or 404
+def moderate(request, slug):
+    wall = get_object_or_404(WallObject, slug = slug, owner = request.user.get_profile())
+
+    return direct_to_template(request, 'moderate.html', {
+        'wall' : wall,
+        'posts' : Confession.objects.filter(approved=False, declined=False)
+        })
+
+
+# @login_required # we dont need login required as there is get object or 404
+@csrf_exempt
+def moderate_post(request, post_id):
+    confession = get_object_or_404(Confession, id=post_id, wall__owner = request.user.get_profile())
+
+    if request.POST['type'] == 'accept':
+        confession.approved = True
+        confession.save()
+
+        status_code = 200
+
+    elif request.POST['type'] == 'decline':
+        confession.declined = True
+        confession.save()
+
+        status_code = 200
+
+    else:
+        status_code = 500
+
+
+    return HttpResponse(simplejson.dumps({}), content_type="application/json", status=status_code)
+
 
 
 
@@ -101,3 +137,5 @@ def post(request, slug):
         'wall' : wall,
         'form' : form,
         })
+
+

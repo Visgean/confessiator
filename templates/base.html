@@ -66,20 +66,21 @@
           <div class="masthead">
             <ul class="nav nav-pills pull-right">
                 {% if user.is_authenticated %}
-                <li class="disabled"><a href="#">{{user.get_profile}}</a></li>
-                <li class=""><a href="{% url logout %}?next=/">{% trans "Logout" %}</a></li>
+                    <li class="disabled"><a href="#">{{user.get_profile}}</a></li>
+                    <li class=""><a href="{% url logout %}?next=/">{% trans "Logout" %}</a></li>
                 {% endif %}
-                <a href="https://github.com/Visgean/confessiator"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>         </ul>
-                <h3 class="muted"><a href="/">{% trans "Confessiator" %}</a></h3>
+                <a href="https://github.com/Visgean/confessiator"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>         
+            </ul>
+                <h3 class="muted"><a href="/">{% trans "Confessiator" %}</a>{% if wall %} / {{wall.name}}{% endif %}</h3>
             </div>
             {% endblock navbar %}
 
             <hr>
 
             {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                {% endfor %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
             {% endif %}
 
             {% block content %}

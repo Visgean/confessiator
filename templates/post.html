@@ -4,19 +4,19 @@
 
 
 {% block content %}
-	<div class="well">
-		<h1>{% trans "Confess to" %} {{wall.name}} </h1>
-		<hr>
-		<form method='post'>
+<div class="well">
+	<h1>{% trans "Confess to" %} <a href='{{wall.url}}'>{{wall.name}}</a></h1>
+	<hr>
+	<form method='post'>
 		{% csrf_token %}
-		<textarea id="id_content" name="content" class="input-block-level" type="text" placeholder="{% trans "Write your confession here" %}" required></textarea>
+		<textarea id="id_content" name="content" class="input-block-level" type="text" placeholder="{% trans "Write your confession here" %}" rows='3' required></textarea>
 
 		{% for field in form.hidden_fields %}
-		{{ field }}
+			{{ field }}
 		{% endfor %} 
 
-	    <input type="submit" value="{% trans 'Confess' %}" class="btn btn-large btn-block btn-success" />
+		<input type="submit" value="{% trans 'Confess' %}" class="btn btn-large btn-block btn-success" />
 
-		</form>
-	</div>
+	</form>
+</div>
 {% endblock content %}

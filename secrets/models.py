@@ -67,6 +67,10 @@ class WallObject(models.Model):
     def get_post_url(self):
         return ('post', (self.slug,))
 
+    @models.permalink
+    def get_moderate_url(self):
+        return ('moderate', (self.slug,))
+
 
     class Meta:
         verbose_name = _('Facebook wall')

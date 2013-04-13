@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+
+{% block content %}
+{% for post in posts %}
+<div class="well">
+	<textarea name="content" class="input-block-level" type="text" rows='3' required>{{post.content}}</textarea>
+
+	<a class="btn btn-large btn-block btn-success" style="max-width: 400px; margin: 0 auto 10px;" onclick='moderate(this, "{% url moderate_post post.id %}", "accept");'>{% trans "Accept" %}</a>
+	<a class="btn btn-large btn-block btn-danger"  style="max-width: 400px; margin: 0 auto 10px;" onclick='moderate(this, "{% url moderate_post post.id %}", "decline");'>{% trans "Decline" %}</a>
+</div>
+{% endfor %}
+
+<div class="well" style="max-width: 400px; margin: 0 auto 10px;">
+	<a class="btn btn-large btn-block btn-success" href="">{% trans "Reload" %}</a>
+</div>
+
+
+
+<script type="text/javascript">
+var moderate = function (that, moderate_url, type) {
+	$.ajax({
+		type: "POST",
+		url: moderate_url,
+		data: {type: type}
+	}).done(function() {
+		$(that).parent().hide({
+			duration: 900,
+		})
+	});
+};
+</script>
+
+
+{% endblock content %}
