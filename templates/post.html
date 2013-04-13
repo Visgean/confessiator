@@ -5,8 +5,18 @@
 
 {% block content %}
 	<div class="well">
-		<h1>{% trans "Confess anonymously to" %} {{wall.name}} </h1>
+		<h1>{% trans "Confess to" %} {{wall.name}} </h1>
 		<hr>
+		<form method='post'>
+		{% csrf_token %}
+		<textarea id="id_content" name="content" class="input-block-level" type="text" placeholder="{% trans "Write your confession here" %}" required></textarea>
 
+		{% for field in form.hidden_fields %}
+		{{ field }}
+		{% endfor %} 
+
+	    <input type="submit" value="{% trans 'Confess' %}" class="btn btn-large btn-block btn-success" />
+
+		</form>
 	</div>
 {% endblock content %}

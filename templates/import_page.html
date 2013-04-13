@@ -9,11 +9,11 @@
 	
 	<form action='' method='post'>
 		{% csrf_token %}
-		<p>{% for error in form.non_field_errors %}
-			{{ error }}
+		<div class="alert alert-error">
+			{% for error in field.non_field_errors %}
+				{{ error }}
 			{% endfor %}
-		</p>
-		{{ form.non_field_errors }}
+		</div>
 
 		<table class='table'>
 			{% for field in form %}

@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic.simple import direct_to_template
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from secrets.models import UserProfile, WallObject
 from secrets.forms import WallForm, ConfessionForm
@@ -91,11 +92,12 @@ def post(request, slug):
             post.wall=wall
             post.save()
 
+            messages.success(request, _('Your confession is now waiting to be moderated.'))
             HttpResponseRedirect('.')
     else:
         form = ConfessionForm()
 
-    return direct_to_template(request, 'post.html',{
+    return direct_to_template(request, 'post.html', {
         'wall' : wall,
         'form' : form,
         })

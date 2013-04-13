@@ -49,12 +49,6 @@
     .marketing p + h4 {
         margin-top: 28px;
     }
-
-    .btn-group{
-      bottom: 15px;
-      position: relative;
-      top: 15px;
-    }
     
     </style>
     <link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap-responsive.min.css">
@@ -82,8 +76,13 @@
 
             <hr>
 
-            {% block content %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
 
+            {% block content %}
 
             {% endblock content %}
         </div> <!-- /container -->
