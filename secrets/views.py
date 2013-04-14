@@ -103,6 +103,13 @@ def moderate_post(request, post_id):
 
         status_code = 200
 
+        try: # try to post it now
+            confession.post_to_facebook()
+        else:
+            pass
+
+
+
     elif request.POST['type'] == 'decline':
         confession.declined = True
         confession.save()

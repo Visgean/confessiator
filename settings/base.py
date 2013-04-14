@@ -105,8 +105,7 @@ DEBUG_TOOLBAR_CONFIG = {
 LOGIN_URL = "/"
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
-
-FACEBOOK_EXTENDED_PERMISSIONS = ['user_groups', 'manage_pages']
+FACEBOOK_EXTENDED_PERMISSIONS = ['user_groups', 'manage_pages', 'publish_actions', 'status_update', 'create_note']
 
 LOGGING = {
     'version': 1,

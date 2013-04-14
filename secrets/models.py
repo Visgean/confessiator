@@ -79,6 +79,9 @@ class WallObject(models.Model):
     def __unicode__(self):
         return self.name
 
+    
+    def get_graph_api(self):
+        return facebook.GraphAPI(self.secret_token, timeout=1)
 
 
 
@@ -101,3 +104,9 @@ class Confession(models.Model):
 
     def __unicode__(self):
         return self.content
+
+
+    def post_to_facebook(self):
+        if self.approved:
+            api = self.wall.get_graph_api()
+            return api.put_object(str(self.wall.facebook_id), "feed", message="'{0}'".format(self.content))
