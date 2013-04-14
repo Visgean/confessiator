@@ -109,4 +109,6 @@ class Confession(models.Model):
     def post_to_facebook(self):
         if self.approved:
             api = self.wall.get_graph_api()
-            return api.put_object(str(self.wall.facebook_id), "feed", message="'{0}'".format(self.content))
+            message = api.put_object(str(self.wall.facebook_id), "feed", message="'{0}'".format(self.content))
+            self.posted = True
+            self.save()

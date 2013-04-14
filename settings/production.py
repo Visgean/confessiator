@@ -1,18 +1,23 @@
 #! /usr/bin/python
 # -*- coding: UTF-8 -*-
 
-import sys, getpass
+import sys, getpass, os.path
+
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
+location = os.path.dirname(__file__) # this is not Django setting.
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_DIR, "templates"),
+    # here you can add another templates directory if you wish.
+)
 
 location = "/home/apps/app_00078/app/restaurator/"
 
 sys.path.append(location)
 sys.path.append(location + '../')
 
-DATABASE_SCHEMA = 'restaurator'
 
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
