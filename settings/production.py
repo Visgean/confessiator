@@ -13,7 +13,6 @@ TEMPLATE_DIRS = (
     # here you can add another templates directory if you wish.
 )
 
-location = "/home/apps/app_00078/app/restaurator/"
 
 sys.path.append(location)
 sys.path.append(location + '../')
