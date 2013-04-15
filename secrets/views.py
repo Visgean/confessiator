@@ -98,15 +98,11 @@ def moderate_post(request, post_id):
     confession = get_object_or_404(Confession, id=post_id, wall__owner = request.user.get_profile())
 
     if request.POST['type'] == 'accept':
-        confession.approved = True
-        confession.save()
-
         status_code = 200
 
-        try: # try to post it now
-            confession.post_to_facebook()
-        else:
-            pass
+        confession.post_to_facebook()
+        confession.approved = True
+        confession.save()
 
 
 
