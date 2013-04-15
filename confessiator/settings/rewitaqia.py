@@ -7,21 +7,18 @@ import sys, getpass
 
 USER_HOME_FOLDER = 'visgean'
 PROJECT_NAME = 'restaurator'
-location = "/home/visgean/scripty/confessiator/"
+location = "/home/visgean/scripty/confessiator/confessiator/"
 
 DATABASES = {
 	"default" : {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': location + 'sqlite3.db',                      # Or path to database file if using sqlite3.
+        'NAME': location + '../sqlite3.db',                      # Or path to database file if using sqlite3.
         'USER': 'django',                      # Not used with sqlite3.
         'PASSWORD': 'WpmMMCo7GiWK',                  # Not used with sqlite3.
         'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
-
-# createdb -U postgres -T template_postgis -O django topsceneries
-
 
 MEDIA_ROOT = location + "media/"
 

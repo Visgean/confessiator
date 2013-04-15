@@ -3,7 +3,7 @@
 venv
 confessiator/secrets/fixtures/
 confessiator/credentials.py
-confessiator/sqlite3.db
+sqlite3.db
 
 # C extensions
 *.so
