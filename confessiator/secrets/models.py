@@ -48,7 +48,7 @@ class WallObject(models.Model):
     name = models.CharField(_('Name'), max_length=20)
     content = models.TextField(_('Content'), help_text=_('Rules for your page, parsed with markdown'), blank=True, null=True, )
     secret_token = models.CharField(max_length=140)
-    facebook_id = models.IntegerField()
+    facebook_id = models.CharField(max_length=30)
     wall_type = models.CharField(_('Wall type'), max_length=2, choices=WALL_TYPES)
     slug = models.SlugField(_('URL id'), help_text=_('URL identifier for adding new objects'), unique=True)
     
@@ -109,6 +109,6 @@ class Confession(models.Model):
     def post_to_facebook(self):
         if self.approved:
             api = self.wall.get_graph_api()
-            message = api.put_object(str(self.wall.facebook_id), "feed", message="'{0}'".format(self.content))
+            message = api.put_object(self.wall.facebook_id, "feed", message="'{0}'".format(self.content))
             self.posted = True
             self.save()

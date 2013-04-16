@@ -74,7 +74,7 @@ def import_page(request, uid):
     })
 
 
-# @login_required # we dont need login required as there is get object or 404
+@login_required
 def wall_detail(request, slug):
     wall = get_object_or_404(WallObject, slug = slug, owner = request.user.get_profile())
 
@@ -82,7 +82,7 @@ def wall_detail(request, slug):
         'wall' : wall
         })
 
-# @login_required # we dont need login required as there is get object or 404
+@login_required
 def moderate(request, slug):
     wall = get_object_or_404(WallObject, slug = slug, owner = request.user.get_profile())
 
@@ -92,7 +92,7 @@ def moderate(request, slug):
         })
 
 
-# @login_required # we dont need login required as there is get object or 404
+@login_required
 @csrf_exempt
 def moderate_post(request, post_id):
     confession = get_object_or_404(Confession, id=post_id, wall__owner = request.user.get_profile())
