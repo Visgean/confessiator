@@ -11,4 +11,4 @@ python manage.py syncdb --noinput
 echo 'Manage migrate'
 python manage.py migrate --noinput
 
-cp -R $OPENSHIFT_REPO_DIR/confessiator/media/*  $OPENSHIFT_REPO_DIR/wsgi/static
+#cp -R $OPENSHIFT_REPO_DIR/confessiator/media/*  $OPENSHIFT_REPO_DIR/wsgi/static

@@ -27,6 +27,6 @@ urlpatterns += patterns('confessiator.secrets.views',
 	# url(r'^p/(?P<slug>\w+)/associate_admin$', view='moderate', name='moderate'),
 	)
 
-# urlpatterns += patterns('',
-# 	(r'^%s(?P<path>.*)$' % MEDIA_URL[1:], 'django.views.static.serve', {'document_root': MEDIA_ROOT}),
-# 	)
+urlpatterns += patterns('',
+	(r'^%s(?P<path>.*)$' % MEDIA_URL[1:], 'django.views.static.serve', {'document_root': MEDIA_ROOT}),
+	)
