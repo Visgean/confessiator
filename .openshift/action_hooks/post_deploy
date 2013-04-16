@@ -3,10 +3,11 @@
 # is deployed and started.  This script gets executed directly, so
 # it could be python, php, ruby, etc.
 
+cp $OPENSHIFT_REPO_DIR/../data/credentials.py  $OPENSHIFT_REPO_DIR/credentials.py
+
 source ~/python-2.7/activate_virtenv
 cd $OPENSHIFT_REPO_DIR/
 echo 'Manage syncdb'
 python manage.py syncdb --noinput
 echo 'Manage migrate'
 python manage.py migrate --noinput
-cp $OPENSHIFT_REPO_DIR/../data/credentials.py  $OPENSHIFT_REPO_DIR/credentials.py
