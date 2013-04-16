@@ -4,12 +4,15 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 
-from confessiator.credentials import *
 
 if socket.gethostname() in ("Rew", 'rewi'):
     from confessiator.settings.rewitaqia import *
 else:
     from confessiator.settings.production import *
+
+from confessiator.credentials import *
+
+
 
 ADMINS = (
     ('Visgean Skeloru', 'Visgean@gmail.com'),
