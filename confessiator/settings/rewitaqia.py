@@ -7,7 +7,7 @@ import sys, getpass
 
 USER_HOME_FOLDER = 'visgean'
 PROJECT_NAME = 'restaurator'
-location = "/home/visgean/scripty/confessiator/confessiator/"
+location = "/home/visgean/scripty/confessiator_source/confessiator/"
 
 DATABASES = {
 	"default" : {

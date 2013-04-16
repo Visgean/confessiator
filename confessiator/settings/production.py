@@ -14,13 +14,11 @@ TEMPLATE_DEBUG = DEBUG
 location = os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'confessiator')
 
 TEMPLATE_DIRS = (
-    os.path.join(location, "templates"),
-    # here you can add another templates directory if you wish.
+    os.path.join(location, "/templates"),
 )
 
 
 sys.path.append(location)
-sys.path.append(location + '..')
 
 MEDIA_ROOT = location + "media/"
 
