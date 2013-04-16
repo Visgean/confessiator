@@ -11,11 +11,7 @@ import urlparse
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-location = os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'confessiator')
-
-TEMPLATE_DIRS = (
-    os.path.join(location, "/templates"),
-)
+location = os.environ['OPENSHIFT_REPO_DIR'] + 'confessiator/'
 
 
 sys.path.append(location)
