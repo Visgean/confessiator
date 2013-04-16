@@ -104,11 +104,3 @@ class Confession(models.Model):
 
     def __unicode__(self):
         return self.content
-
-
-    def post_to_facebook(self):
-        if self.approved:
-            api = self.wall.get_graph_api()
-            message = api.put_object(self.wall.facebook_id, "feed", message="'{0}'".format(self.content))
-            self.posted = True
-            self.save()
