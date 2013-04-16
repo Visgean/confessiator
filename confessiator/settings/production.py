@@ -13,18 +13,19 @@ TEMPLATE_DEBUG = DEBUG
 
 location = os.environ['OPENSHIFT_REPO_DIR'] + 'confessiator/'
 
+
 sys.path.append(location)
 
+MEDIA_ROOT = location + "media/"
 
-STATICFILES_DIRS = (location + "static/",)
 
 if 'OPENSHIFT_REPO_DIR' in os.environ:
-    MEDIA_ROOT= os.environ['OPENSHIFT_REPO_DIR'] + '/wsgi/static'
+    MEDIA_ROOT= os.environ['OPENSHIFT_REPO_DIR'] + '/wsgi/media/'
 else:
     MEDIA_ROOT = location + "media/"
 
 
-
+STATICFILES_DIRS = (location + "static/",)
 TEMPLATE_DIRS = (location + "templates/",)
 
 EMAIL_HOST = 'localhost'
