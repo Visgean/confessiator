@@ -17,7 +17,7 @@ from secrets.forms import WallForm, ConfessionForm
 get_pages = lambda u: [u.graph_api.get_object(p['page_id']) for p in u.graph_api.fql('SELECT page_id FROM page_admin WHERE uid={0}'.format(u.get_fuid()))]
 random_token = lambda l: "".join( [random.choice(string.letters) for i in xrange(l)] )
 
-
+@csrf_exempt
 def home(request):
     if request.user.is_authenticated():
         p, c = UserProfile.objects.get_or_create(user=request.user)  # users must have profiles!
