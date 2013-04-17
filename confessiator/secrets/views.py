@@ -22,6 +22,8 @@ random_token = lambda l: "".join( [random.choice(string.letters) for i in xrange
 def home(request):
     if request.user.is_authenticated():
         p, c = UserProfile.objects.get_or_create(user=request.user)  # users must have profiles!
+
+        walls = p.owned_walls.all() if len(p.owned_walls.all()) else p.wallobject_set.all()
         return direct_to_template(request, 'home.html', {
             'walls': p.owned_walls.all()
         })
