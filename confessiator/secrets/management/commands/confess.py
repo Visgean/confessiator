@@ -8,7 +8,7 @@ class Command(BaseCommand):
 	def handle(self, *args, **options):
 		for c in Confession.objects.filter(approved=True, posted = False):
 			api = c.wall.get_graph_api()
-			message = api.put_object(c.wall.facebook_id, "feed", message="'{0}'".format(c.content))
+			message = api.put_object(c.wall.facebook_id, "feed", message=u"'{0}'".format(c.content))
 			c.posted = True
 			c.save()
 
