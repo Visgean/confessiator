@@ -77,7 +77,7 @@ def import_page(request, uid):
 
 @login_required
 def wall_detail(request, slug):
-    wall = get_object_or_404(WallObject, slug = slug, Q(Q(owner = request.user.get_profile()) | Q(admins = request.user.get_profile())))
+    wall = get_object_or_404(WallObject, Q(Q(owner = request.user.get_profile()) | Q(admins = request.user.get_profile())), slug = slug)
 
     return direct_to_template(request, 'wall_detail.html', {
         'wall' : wall
@@ -85,7 +85,7 @@ def wall_detail(request, slug):
 
 @login_required
 def moderate(request, slug):
-    wall = get_object_or_404(WallObject, slug = slug, Q(Q(owner = request.user.get_profile()) | Q(admins = request.user.get_profile())))
+    wall = get_object_or_404(WallObject, Q(Q(owner = request.user.get_profile()) | Q(admins = request.user.get_profile())), slug = slug)
 
     return direct_to_template(request, 'moderate.html', {
         'wall' : wall,
@@ -107,9 +107,7 @@ def associate_moderators(request, slug, token):
 @login_required
 @csrf_exempt
 def moderate_post(request, post_id):
-    wall = get_object_or_404(WallObject, slug = slug, Q(Q(owner = request.user.get_profile()) | Q(admins = request.user.get_profile())))
-
-    confession = get_object_or_404(Confession, id=post_id, Q(Q(wall_owner = request.user.get_profile()) | Q(wall_admins = request.user.get_profile())))
+    confession = get_object_or_404(Confession, Q(Q(wall_owner = request.user.get_profile()) | Q(wall_admins = request.user.get_profile())), id=post_id)
 
     if request.POST['type'] == 'accept':
         status_code = 200
