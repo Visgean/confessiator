@@ -5,8 +5,8 @@
 
 {% block content %}
 <div class="jumbotron">
-    <h1>{% trans "Let your users post anonymously to your Facebook page" %}</h1>
-    <p class="lead">{% trans "This website enables your users to post anonymously to your Facebook page. (Yeah, like you wouldn't get  that that huge thing above)" %}</p>
+    <h1>{% trans "Let your users confess to your Facebook page" %}</h1>
+    <p class="lead">{% trans "Registration is simple, just login with facebook and select Facebook page you want to use for confessions." %}</p>
       <div class="well" style="max-width: 400px; margin: 0 auto 10px;">
         <a class="btn btn-large btn-block btn-success" href="{% url socialauth_begin "facebook" %}">{% trans "Sign up with Facebook" %}</a>
       </div>
@@ -18,10 +18,10 @@
     <div class="row-fluid marketing">
         <div class="span6">
           <h4>{% trans "Why?" %}</h4>
-          <p>{% trans "This project has started as a reaction to a huge demand for the secret posting services, but most of the working Facebook pages are not open for registration nor open source. In this project I want to made an easy to use service that enabled every community to have it's own Facebook page to reveal secrets " %}</p>
+          <p>{% trans "This project has started as a reaction to a huge demand for the confessions posting services, most of the working Facebook pages are using google docs and similar things. That seems to be rather stupid and that is why I created this project. " %}</p>
 
           <h4>{% trans "Is this a copy?" %}</h4>
-          <p>{% trans "Yes, this page is heavily inspired by similar pages." %}</p>
+          <p>{% trans "Not really, there are some similar projects but none of them is open for registration nor open source" %}</p>
 
       </div>
 
@@ -29,8 +29,8 @@
           <h4>{% trans "Can I have the code?" %}</h4>
           <p>{% trans "Yes, just look at my github page: " %}<a href="https://github.com/Visgean/confessiator">Visgean/confessiator</a>, it's written in Django.</p>
 
-          <h4>{% trans "Who should use it?" %}</h4>
-          <p>{% trans "Any community that consist from more than two individuals." %}</p>
+          <h4>{% trans "How often do you sync the confessions?" %}</h4>
+          <p>{% trans "Hourly." %}</p>
 
           <h4>{% trans "Is it hard to register?" %}</h4>
           <p>{% trans "Not really, just click on that big green button." %}</p>
