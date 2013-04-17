@@ -12,4 +12,4 @@ class Command(BaseCommand):
 			c.posted = True
 			c.save()
 
-			self.stdout.write('{0} was synced.'.format(c.content))
+			self.stdout.write('{0} was synced. \n'.format(c.content))

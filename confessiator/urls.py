@@ -24,7 +24,7 @@ urlpatterns += patterns('confessiator.secrets.views',
 	url(r'^p/(?P<slug>\w+)/moderate$', view='moderate', name='moderate'),
 	url(r'^m/(?P<post_id>\d+)/$', view='moderate_post', name='moderate_post'),
 
-	# url(r'^p/(?P<slug>\w+)/associate_admin$', view='moderate', name='moderate'),
+	url(r'^p/(?P<slug>\w+)/associate_admin/(?P<token>\w+)$', view='associate_admin', name='associate_admin'),
 	)
 
 urlpatterns += patterns('',

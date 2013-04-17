@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 
 from secrets.models import UserProfile, WallObject, Confession
 from secrets.forms import WallForm, ConfessionForm
@@ -76,7 +77,7 @@ def import_page(request, uid):
 
 @login_required
 def wall_detail(request, slug):
-    wall = get_object_or_404(WallObject, slug = slug, owner = request.user.get_profile())
+    wall = get_object_or_404(WallObject, Q(slug = slug) & Q(Q(owner = request.user.get_profile()) | Q(admins = request.user.get_profile())))
 
     return direct_to_template(request, 'wall_detail.html', {
         'wall' : wall
@@ -84,6 +85,17 @@ def wall_detail(request, slug):
 
 @login_required
 def moderate(request, slug):
+    wall = get_object_or_404(WallObject, slug = slug, owner = request.user.get_profile())
+
+    return direct_to_template(request, 'moderate.html', {
+        'wall' : wall,
+        'posts' : Confession.objects.filter(approved=False, declined=False)
+        })
+
+
+
+@login_required
+def associate_admin(request, slug, key):
     wall = get_object_or_404(WallObject, slug = slug, owner = request.user.get_profile())
 
     return direct_to_template(request, 'moderate.html', {
@@ -114,6 +126,9 @@ def moderate_post(request, post_id):
 
 
     return HttpResponse(simplejson.dumps({}), content_type="application/json", status=status_code)
+
+
+
 
 
 
