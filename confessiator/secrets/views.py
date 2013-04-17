@@ -6,7 +6,7 @@ from django.utils.translation import ugettext as _
 from django.views.generic import TemplateView, DetailView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic.simple import direct_to_template
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_list_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
@@ -77,7 +77,7 @@ def import_page(request, uid):
 
 @login_required
 def wall_detail(request, slug):
-    wall = get_object_or_404(WallObject, Q(Q(owner = request.user.get_profile()) | Q(admins = request.user.get_profile())), slug = slug)
+    wall = get_list_or_404(WallObject, Q(Q(owner = request.user.get_profile()) | Q(admins = request.user.get_profile())), slug = slug)[0]
 
     return direct_to_template(request, 'wall_detail.html', {
         'wall' : wall
@@ -85,7 +85,7 @@ def wall_detail(request, slug):
 
 @login_required
 def moderate(request, slug):
-    wall = get_object_or_404(WallObject, Q(Q(owner = request.user.get_profile()) | Q(admins = request.user.get_profile())), slug = slug)
+    wall = get_list_or_404(WallObject, Q(Q(owner = request.user.get_profile()) | Q(admins = request.user.get_profile())), slug = slug)[0]
 
     return direct_to_template(request, 'moderate.html', {
         'wall' : wall,
@@ -96,7 +96,7 @@ def moderate(request, slug):
 
 @login_required
 def associate_moderators(request, slug, token):
-    wall = get_object_or_404(WallObject, slug = slug, admin_token = token)
+    wall = get_list_or_404(WallObject, slug = slug, admin_token = token)[0]
     wall.admins.add(request.user.get_profile())
     wall.save()
 
@@ -107,7 +107,7 @@ def associate_moderators(request, slug, token):
 @login_required
 @csrf_exempt
 def moderate_post(request, post_id):
-    confession = get_object_or_404(Confession, Q(Q(wall_owner = request.user.get_profile()) | Q(wall_admins = request.user.get_profile())), id=post_id)
+    confession = get_list_or_404(Confession, Q(Q(wall_owner = request.user.get_profile()) | Q(wall_admins = request.user.get_profile())), id=post_id)[0]
 
     if request.POST['type'] == 'accept':
         status_code = 200
@@ -134,7 +134,7 @@ def moderate_post(request, post_id):
 
 
 def post(request, slug):
-    wall = get_object_or_404(WallObject, slug = slug)
+    wall = get_list_or_404(WallObject, slug = slug)
     if request.POST:
         form = ConfessionForm(request.POST)
 
