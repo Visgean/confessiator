@@ -16,7 +16,7 @@ class UserProfile(models.Model):
     user = models.ForeignKey(User)
 
     def __unicode__(self):
-        return '{0} {1}'.format(self.user.first_name, self.user.last_name)
+        return u'{0} {1}'.format(self.user.first_name, self.user.last_name)
 
     @property
     def facebook_profile(self):
