@@ -13,9 +13,9 @@
 	{% else %}
 		<div class="jumbotron">
 		    <h2>{% trans "You dont have any pages/groups enabled with anonymous posting, add them?" %}</h2>
-	        <a class="btn btn-large btn-success" href="{% url select_wall %}">{% trans "Add them!" %}</a>
    		</div>
 	{% endif %}	
+        <a class="btn btn-large btn-success" href="{% url select_wall %}">{% trans "Add them!" %}</a>
 
 
   {% endblock content %}
