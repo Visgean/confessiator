@@ -96,8 +96,9 @@ def moderate(request, slug):
 
 @login_required
 def associate_moderators(request, slug, token):
+    p, c = UserProfile.objects.get_or_create(user=request.user)  # users must have profiles!
     wall = get_list_or_404(WallObject, slug = slug, admin_token = token)[0]
-    wall.admins.add(request.user.get_profile())
+    wall.admins.add(p)
     wall.save()
 
     return HttpResponseRedirect(wall.get_moderate_url())
