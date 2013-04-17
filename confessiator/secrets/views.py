@@ -108,7 +108,7 @@ def associate_moderators(request, slug, token):
 @login_required
 @csrf_exempt
 def moderate_post(request, post_id):
-    confession = get_list_or_404(Confession, Q(Q(wall_owner = request.user.get_profile()) | Q(wall_admins = request.user.get_profile())), id=post_id)[0]
+    confession = get_list_or_404(Confession, Q(Q(wall__owner = request.user.get_profile()) | Q(wall__admins = request.user.get_profile())), id=post_id)[0]
 
     if request.POST['type'] == 'accept':
         status_code = 200
