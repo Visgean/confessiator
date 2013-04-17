@@ -6,7 +6,7 @@ from django.utils.translation import ugettext as _
 from django.views.generic import TemplateView, DetailView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic.simple import direct_to_template
-from django.shortcuts import get_list_or_404
+from django.shortcuts import get_list_or_404, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
@@ -135,7 +135,8 @@ def moderate_post(request, post_id):
 
 
 def post(request, slug):
-    wall = get_list_or_404(WallObject, slug = slug)
+    wall = get_object_or_404(WallObject, slug = slug)
+
     if request.POST:
         form = ConfessionForm(request.POST)
 
