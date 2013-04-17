@@ -45,10 +45,10 @@ class WallObject(models.Model):
     )
 
     owner = models.ForeignKey(UserProfile, related_name='owned_walls')
-    name = models.CharField(_('Name'), max_length=20)
-    content = models.TextField(_('Content'), help_text=_('Rules for your page, parsed with markdown'), blank=True, null=True, )
+    name = models.CharField(_('Name'), max_length=20, unique=True)
+    content = models.TextField(_('Content'), help_text=_('Rules for your page, parsed with markdown'), blank=True, null=True)
     secret_token = models.CharField(max_length=140)
-    facebook_id = models.CharField(max_length=30)
+    facebook_id = models.CharField(max_length=30, unique=True)
     wall_type = models.CharField(_('Wall type'), max_length=2, choices=WALL_TYPES)
     slug = models.SlugField(_('URL id'), help_text=_('URL identifier for adding new objects'), unique=True)
     
