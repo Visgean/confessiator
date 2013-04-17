@@ -9,7 +9,7 @@
 		<hr>
 		<a class="btn btn-large btn-block btn-info" href="{{wall.get_post_url}}">{% trans "Confess publicly" %}</a>
 		<a class="btn btn-large btn-block btn-success" href="{{wall.get_moderate_url}}">{% trans "Moderate" %}</a>
-		<a class="btn btn-large btn-block btn-warning" href="">{% trans "Edit" %}</a>
+		<a class="btn btn-large btn-block btn-warning" href="{% url associate_moderators wall.slug wall.admin_token %}">{% trans "URL for moderators" %}</a>
 	</div>
 
 

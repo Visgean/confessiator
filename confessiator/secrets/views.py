@@ -85,7 +85,7 @@ def wall_detail(request, slug):
 
 @login_required
 def moderate(request, slug):
-    wall = get_object_or_404(WallObject, slug = slug, owner = request.user.get_profile())
+    wall = get_object_or_404(WallObject, Q(slug = slug) & Q(Q(owner = request.user.get_profile()) | Q(admins = request.user.get_profile())))
 
     return direct_to_template(request, 'moderate.html', {
         'wall' : wall,
@@ -95,13 +95,13 @@ def moderate(request, slug):
 
 
 @login_required
-def associate_admin(request, slug, key):
-    wall = get_object_or_404(WallObject, slug = slug, owner = request.user.get_profile())
+def associate_moderators(request, slug, key):
+    wall = get_object_or_404(WallObject, slug = slug)
+    wall.admins.add(request.user.get_profile())
+    wall.save()
 
-    return direct_to_template(request, 'moderate.html', {
-        'wall' : wall,
-        'posts' : Confession.objects.filter(approved=False, declined=False)
-        })
+    return HttpResponseRedirect(wall.get_moderate_url())
+
 
 
 @login_required
