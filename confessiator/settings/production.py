@@ -8,7 +8,7 @@ import os
 import urlparse
 
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 location = os.environ['OPENSHIFT_REPO_DIR'] + 'confessiator/'
