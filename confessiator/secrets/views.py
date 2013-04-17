@@ -95,8 +95,8 @@ def moderate(request, slug):
 
 
 @login_required
-def associate_moderators(request, slug, key):
-    wall = get_object_or_404(WallObject, slug = slug)
+def associate_moderators(request, slug, token):
+    wall = get_object_or_404(WallObject, slug = slug, admin_token = token)
     wall.admins.add(request.user.get_profile())
     wall.save()
 
