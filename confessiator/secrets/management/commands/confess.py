@@ -11,8 +11,10 @@ class Command(BaseCommand):
 
 			fql = u"SELECT message FROM stream WHERE source_id={0} AND message='{1}'".format(c.wall.facebook_id, c.content)
 			posted = bool(c.wall.owner.graph_api.fql(fql.encode('utf-8'))) # we have to use users api as wall api cannot do fql
+			print posted
 			if posted:
 				c.posted=True
+				c.save()
 			else:
 				message = api.put_object(c.wall.facebook_id, "feed", message=c.content.encode('utf-8'))
 				c.posted = True
