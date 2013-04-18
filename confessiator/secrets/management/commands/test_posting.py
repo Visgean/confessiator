@@ -15,4 +15,4 @@ class Command(BaseCommand):
 				posted = c.wall.owner.graph_api.fql(fql.encode('utf-8')) # we have to use users api as wall api cannot do fql
 				print posted
 			except:
-				print post
+				print c
