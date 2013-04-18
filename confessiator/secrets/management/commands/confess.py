@@ -9,7 +9,7 @@ class Command(BaseCommand):
 		for c in Confession.objects.filter(approved=True, posted = False)[:3]:
 			api = c.wall.get_graph_api()
 
-			fql = u"SELECT message FROM stream WHERE source_id={0} AND message='{1}'".format(c.wall.facebook_id, c.content)
+			fql = u"SELECT message FROM stream WHERE source_id={0} AND message={1}".format(c.wall.facebook_id, c.content)
 			posted = c.wall.owner.graph_api.fql(fql.encode('utf-8')) # we have to use users api as wall api cannot do fql
 			if posted:
 				c.posted=True
@@ -18,6 +18,7 @@ class Command(BaseCommand):
 					message = api.put_object(c.wall.facebook_id, "feed", message=c.content.encode('utf-8'))
 					c.posted = True
 				except GraphAPIError, e:
-					print e
+					if e == '(#506) Duplicate status message':
+						c.posted = True
 		
 			c.save()
