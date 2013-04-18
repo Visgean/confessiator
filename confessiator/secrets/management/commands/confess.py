@@ -16,6 +16,7 @@ class Command(BaseCommand):
 				if posted: 
 					c.posted = True
 					c.save()
+					print posted
 					continue # lets not do anuthing with that
 			except:
 				pass
