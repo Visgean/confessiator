@@ -10,7 +10,7 @@ class Command(BaseCommand):
 			api = c.wall.get_graph_api()
 
 			fql = u'SELECT message FROM stream WHERE source_id={0} AND message="{1}"'.format(c.wall.facebook_id, c.content)
-			posted = bool(c.wall.user.get_graph_api.fql(fql.encode('utf-8')))
+			posted = bool(c.wall.owner.get_graph_api.fql(fql.encode('utf-8'))) # we have to use users api as wall api cannot do fql
 			if posted:
 				c.posted=True
 			else:
