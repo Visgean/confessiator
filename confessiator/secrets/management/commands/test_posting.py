@@ -1,7 +1,11 @@
-from django.core.management.base import BaseCommand, CommandError
-from secrets.models import Confession
 from facebook import GraphAPIError
 from ssl import SSLError
+from re import escape
+
+from django.core.management.base import BaseCommand, CommandError
+
+from secrets.models import Confession
+
 
 class Command(BaseCommand):
 	help = 'Tries to post all the approved confessions'
@@ -11,6 +15,7 @@ class Command(BaseCommand):
 			api = c.wall.get_graph_api()
 
 			fql = u"""SELECT message FROM stream WHERE source_id={0} AND message='{1}' """.format(c.wall.facebook_id, c.content)
+			fql = escape(fql)
 			try:
 				posted = c.wall.owner.graph_api.fql(fql.encode('utf-8')) # we have to use users api as wall api cannot do fql
 				print posted
